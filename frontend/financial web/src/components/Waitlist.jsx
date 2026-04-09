@@ -64,7 +64,8 @@ export default function Waitlist({ isOpen, onClose }) {
         }
       });
 
-      const response = await fetch('http://localhost:3000/api/quiz/submit', {
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${baseUrl}/api/quiz/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
