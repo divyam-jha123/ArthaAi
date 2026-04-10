@@ -1,0 +1,15 @@
+[build]
+  # Install both backend and frontend dependencies, then build the frontend
+  command = "npm install --prefix backend && cd 'frontend/financial web' && npm install && npm run build"
+  publish = "frontend/financial web/dist"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
+  # Ensures that the backend folder is included in the zip
+  included_files = ["backend/**"]
