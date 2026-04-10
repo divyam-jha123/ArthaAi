@@ -16,9 +16,9 @@ services:
         value: 8000
 
   # Frontend React App
-  - type: static
+  - type: web
     name: arthamind-frontend
-    plan: free
+    env: static
     rootDir: frontend/financial web
     buildCommand: npm install && npm run build
     publishPath: dist
