@@ -1,0 +1,31 @@
+services:
+  # Backend Express Server
+  - type: web
+    name: arthamind-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: MONGO_URI
+        sync: false # User will set this in the dashboard
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 8000
+
+  # Frontend React App
+  - type: web
+    name: arthamind-frontend
+    env: static
+    plan: free
+    rootDir: frontend/financial web
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: arthamind-backend
+          property: host
